@@ -4,8 +4,21 @@
 [![Django](https://img.shields.io/badge/Django-3.2+-green.svg)](https://djangoproject.com)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-blue.svg)](https://postgresql.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Security](https://img.shields.io/badge/Security-Hardened-green.svg)](#security)
 
 A comprehensive healthcare management system built with Django that provides disease prediction, patient-doctor consultation, appointment booking, and community forum features.
+
+## 🔒 SECURITY NOTICE
+
+**⚠️ CRITICAL: This project requires secure configuration before deployment**
+
+- **NEVER commit `.env` files or credentials to version control**
+- **Always use strong, unique passwords for production**
+- **Generate new secret keys for each environment**
+- **Set `DEBUG=False` in production**
+- **Use HTTPS in production environments**
+
+See the [Security Configuration](#security-configuration) section for detailed setup instructions.
 
 ## 🌟 Features
 
@@ -89,23 +102,43 @@ GRANT ALL PRIVILEGES ON DATABASE predico2f TO postgres;
 ```
 
 ### 5. Environment Configuration
+
+⚠️ **SECURITY CRITICAL**: Never use default or weak credentials!
+
 1. Copy the environment template:
 ```bash
 cp .env.example .env
 ```
 
-2. Edit `.env` file with your configuration:
-```env
-SECRET_KEY=your-super-secret-key-here
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
+2. Generate a new secret key:
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
 
-DB_NAME=predico2f
-DB_USER=postgres
-DB_PASSWORD=your-database-password
+3. Edit `.env` file with SECURE configuration:
+```env
+# Use the generated secret key (NEVER use the default)
+SECRET_KEY=your-generated-secret-key-here
+
+# Set to False for production
+DEBUG=False
+
+# Your domain(s)
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+
+# Strong database credentials
+DB_NAME=your_secure_database_name
+DB_USER=your_database_user
+DB_PASSWORD=your_very_strong_password_here
 DB_HOST=localhost
 DB_PORT=5432
+
+# Email credentials (use app-specific passwords)
+EMAIL_HOST_USER=your-email@example.com
+EMAIL_HOST_PASSWORD=your-app-specific-password
 ```
+
+⚠️ **NEVER commit the `.env` file to version control!**
 
 ### 6. Database Migration
 ```bash
@@ -227,6 +260,46 @@ The system includes a trained machine learning model for disease prediction:
 - **Storage**: Serialized model in `trained_model` file
 
 ## 🔧 Configuration
+
+### Security Configuration
+
+This project follows security best practices and requires proper configuration:
+
+#### Required Environment Variables
+
+**Critical Variables (Must be set):**
+| Variable | Description | Security Notes |
+|----------|-------------|----------------|
+| `SECRET_KEY` | Django secret key | **Generate new for each environment** |
+| `DEBUG` | Debug mode | **Set to False in production** |
+| `DB_PASSWORD` | Database password | **Use strong, unique password** |
+| `ALLOWED_HOSTS` | Allowed hostnames | **Set your domain(s)** |
+
+#### Security Validation
+
+Run the security check before deployment:
+```bash
+python security_config.py
+```
+
+This will validate:
+- ✅ All required environment variables are set
+- ✅ No weak or default passwords are used
+- ✅ DEBUG is disabled in production
+- ✅ Secret key is properly configured
+
+#### Password Security Requirements
+
+**Database Passwords must:**
+- Be at least 12 characters long
+- Include uppercase, lowercase, numbers, and symbols
+- Not use common words or patterns
+- Be unique to this application
+
+**Email Credentials:**
+- Use app-specific passwords for Gmail
+- Enable 2FA on email accounts
+- Rotate passwords regularly
 
 ### Environment Variables
 | Variable | Description | Default |

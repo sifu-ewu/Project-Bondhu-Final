@@ -1,0 +1,153 @@
+# ===================================================
+# Project Bondhu - Git Ignore File
+# ===================================================
+
+# Environment Variables (CRITICAL - NEVER COMMIT)
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+*.env
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media files (user uploads)
+media/
+pics/
+
+# Static files (collected)
+staticfiles/
+static_collected/
+
+# Secret Keys and Credentials
+secrets.json
+credentials.json
+*_credentials.json
+*.key
+*.pem
+*.crt
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.coverage.*
+
+# Logs
+logs/
+*.log
+log/
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Machine Learning Models (if sensitive)
+# Uncomment if your trained models contain sensitive data
+# trained_model
+# *.pkl
+# *.model
+
+# Documentation builds
+docs/_build/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Pipenv
+Pipfile.lock
+
+# Configuration files that might contain secrets
+config.ini
+settings_local.py
+local_config.py
+
+# SSL Certificates
+*.pem
+*.key
+*.crt
+*.cert
+
+# AWS/Cloud credentials
+.aws/
+gcloud/
+azure/
+
+# Email templates with sensitive info
+# email_templates/
+
+# Any file containing "secret", "password", "key", or "token"
+*secret*
+*password*
+*token*
+*credential*
+
+# Project specific
+.env.*
+!.env.example
