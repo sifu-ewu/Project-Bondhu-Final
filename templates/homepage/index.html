@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Project Bondhu{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="jumbotron bg-primary text-white rounded p-5 mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-4">
+                <i class="fas fa-heartbeat"></i> Welcome to Project Bondhu
+            </h1>
+            <p class="lead">Your comprehensive healthcare management system with AI-powered disease prediction, expert consultations, and community support.</p>
+            {% if not user.is_authenticated %}
+                <div class="mt-4">
+                    <a href="{% url 'signup_patient' %}" class="btn btn-light btn-lg me-3">
+                        <i class="fas fa-user-plus"></i> Get Started as Patient
+                    </a>
+                    <a href="{% url 'signup_doctor' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-user-md"></i> Join as Doctor
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4 text-center">
+            <i class="fas fa-hospital fa-5x text-white-50"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-5">Our Services</h2>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">AI Disease Prediction</h5>
+                <p class="card-text">Advanced machine learning algorithms analyze your symptoms to provide accurate disease predictions with confidence scores.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-user-md fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Expert Consultations</h5>
+                <p class="card-text">Connect with qualified doctors for real-time consultations, get prescriptions, and manage your health records.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-calendar-check fa-3x text-info mb-3"></i>
+                <h5 class="card-title">Appointment Booking</h5>
+                <p class="card-text">Schedule appointments with doctors, manage your healthcare calendar, and receive timely reminders.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-comments fa-3x text-warning mb-3"></i>
+                <h5 class="card-title">Community Forum</h5>
+                <p class="card-text">Join discussions with other patients and healthcare professionals in our supportive community forum.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-prescription-bottle-alt fa-3x text-danger mb-3"></i>
+                <h5 class="card-title">Digital Prescriptions</h5>
+                <p class="card-text">Receive and manage digital prescriptions from doctors with complete medication history tracking.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-shield-alt fa-3x text-secondary mb-3"></i>
+                <h5 class="card-title">Secure & Private</h5>
+                <p class="card-text">Your health data is protected with industry-standard security measures and privacy compliance.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Access Section -->
+{% if user.is_authenticated %}
+<div class="row">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h4 class="card-title">Quick Access</h4>
+                <div class="row">
+                    {% if user.patient %}
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'disease_predict' %}" class="btn btn-primary btn-block w-100">
+                                <i class="fas fa-stethoscope"></i> Predict Disease
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'appointment' %}" class="btn btn-success btn-block w-100">
+                                <i class="fas fa-calendar-plus"></i> Book Appointment
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'pconsultation_history' %}" class="btn btn-info btn-block w-100">
+                                <i class="fas fa-history"></i> My Consultations
+                            </a>
+                        </div>
+                    {% elif user.doctor %}
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'dconsultation_history' %}" class="btn btn-primary btn-block w-100">
+                                <i class="fas fa-users"></i> My Patients
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="{% url 'prescription' %}" class="btn btn-success btn-block w-100">
+                                <i class="fas fa-prescription"></i> Create Prescription
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'homeview' %}" class="btn btn-warning btn-block w-100">
+                            <i class="fas fa-comments"></i> Join Forum
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-block w-100">
+                            <i class="fas fa-envelope"></i> Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Statistics Section -->
+<div class="row mt-5 text-center">
+    <div class="col-12">
+        <h3 class="mb-4">Trusted by Healthcare Community</h3>
+    </div>
+    <div class="col-md-3">
+        <h2 class="text-primary">1000+</h2>
+        <p>Active Patients</p>
+    </div>
+    <div class="col-md-3">
+        <h2 class="text-success">200+</h2>
+        <p>Certified Doctors</p>
+    </div>
+    <div class="col-md-3">
+        <h2 class="text-info">5000+</h2>
+        <p>Consultations</p>
+    </div>
+    <div class="col-md-3">
+        <h2 class="text-warning">95%</h2>
+        <p>Satisfaction Rate</p>
+    </div>
+</div>
+{% endblock %}
